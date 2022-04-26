@@ -102,6 +102,7 @@ def optim_approx(mat_l, mat_r, verbose=True):
                    options=options)
     return -res.fun, res.x.astype(np.int)
 
+
 def optim_greedy(mat_l, mat_r, verbose=True):
     """ Greedy algorithm to perform the following optimization problem:
 

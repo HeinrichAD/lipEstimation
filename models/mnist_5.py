@@ -8,6 +8,7 @@ from torch.autograd import Variable
 
 from utils import load_model
 
+
 def mnist_5(loc=None):
     """
     So far, LB for Lipschitz constant on this model is 25.5323 obtained by
@@ -18,6 +19,7 @@ def mnist_5(loc=None):
         loc = 'models/mnist_5.pth.tar'
     load_model(mnist, loc)
     return mnist
+
 
 def test(model, dataset, epoch):
     model.eval()
@@ -38,6 +40,7 @@ def test(model, dataset, epoch):
                 correct,
                 len(dataset.dataset),
                 100. * float(correct) / float(len(dataset.dataset))))
+
 
 class MNIST_classifier(nn.Module):
 
@@ -61,6 +64,7 @@ class MNIST_classifier(nn.Module):
         x = self.conv5(x).view(-1, 10)
         return x
 
+
 if __name__ == '__main__':
 
     use_cuda = torch.cuda.is_available()
@@ -79,7 +83,7 @@ if __name__ == '__main__':
                 transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))]))
 
     train_load = torch.utils.data.DataLoader(data_train, batch_size=batch_size,
-            shuffle=True, num_workers=4)
+            shuffle=True, num_workers=1)
 
     data_test = datasets.MNIST(root='data/', download=True, train=False,
             transform=transforms.Compose([
@@ -87,7 +91,7 @@ if __name__ == '__main__':
                 transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))]))
 
     train_test = torch.utils.data.DataLoader(data_test, batch_size=batch_size,
-            shuffle=True, num_workers=4)
+            shuffle=True, num_workers=1)
 
     epoch = 1
 

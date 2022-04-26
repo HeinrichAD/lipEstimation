@@ -10,6 +10,7 @@ from models.mnist_5 import mnist_5
 
 n_sv = 500
 
+
 def spec_mnist(self, input, output):
     print(self)
     if is_convolution_or_linear(self):
@@ -20,6 +21,7 @@ def spec_mnist(self, input, output):
         self.spectral_norm = s
         self.u = u
         self.v = v
+
 
 def save_singular(mnist):
     # Save for convolutions

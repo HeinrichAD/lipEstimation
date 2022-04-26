@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+
 class DeepNet(nn.Module):
 
     def __init__(self):
@@ -96,6 +97,7 @@ class DeepNet(nn.Module):
         x = x.view(x.size(0), -1)
         x = self.fc1(x)
         return x
+
 
 class BasicConv(nn.Module):
 

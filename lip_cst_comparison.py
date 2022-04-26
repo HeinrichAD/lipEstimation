@@ -22,8 +22,8 @@ from models.mlp import MLP
 from lipschitz_utils import *
 import experiments.gp as gp
 
-from models.actors import actor
-from models.projector import projector
+# from models.actors import actor
+# from models.projector import projector
 
 from lipschitz_approximations import *
 
@@ -31,7 +31,7 @@ from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 from matplotlib import cm
 
-from utils import clip, clip_gradient, save_images, sample_draws, compute_wasserstein
+# from utils import clip, clip_gradient, save_images, sample_draws, compute_wasserstein
 
 # Global parameters
 use_cuda = torch.cuda.is_available()
@@ -43,6 +43,7 @@ use_cuda = torch.cuda.is_available()
 
 #opt = parser.parse_args()
 #print(opt)
+
 
 def create_dataset(data_type):
     normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
@@ -104,7 +105,7 @@ def compute_lipschitz_approximations(model, data):
     # Lipschitz upper bound using the absolute values of the weights
     # WARNING: this computation should be last as so far if changes the model!
     print('Computing lip_abs...')
-    lip_abs = lipschitz_absweights_ub(model).data[0]
+    lip_abs = 0  # lipschitz_absweights_ub(model).data[0]
 
     print('Lipschitz approximations:\nLB-dataset:\t{:.3f}\n'
           'LB-optim:\t{:.3f}\nUB-frobenius:\t{:.3f}\nUB-spectral:\t{:.3f}\n'

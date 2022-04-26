@@ -9,6 +9,7 @@ EXAMPLE:
 import torch
 import torch.nn as nn
 
+
 class MLP(nn.Module):
 
     def __init__(self, dim_input, dim_output, layers):

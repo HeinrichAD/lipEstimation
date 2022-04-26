@@ -11,6 +11,7 @@ EXAMPLE:
 import torch
 import torch.nn as nn
 
+
 class ResidualToy(nn.Module):
 
     def __init__(self, dim_input, dim_output, layers):
@@ -34,7 +35,6 @@ class ResidualToy(nn.Module):
                 nn.Linear(layers[-1], dim_output))
 
         self.model = model
-
 
     def forward(self, x):
         return self.downsample(x) + self.model(x)

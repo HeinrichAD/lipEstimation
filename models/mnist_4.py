@@ -8,6 +8,7 @@ from torch.autograd import Variable
 
 from utils import load_model
 
+
 def mnist_4():
     """
     So far, LB for Lipschitz constant on this model is 25.5323 obtained by
@@ -16,6 +17,7 @@ def mnist_4():
     mnist = MNIST_classifier()
     load_model(mnist, 'models/mnist_4.pth.tar')
     return mnist
+
 
 def test(model, dataset, epoch):
     use_cuda = next(model.parameters()).is_cuda
@@ -40,6 +42,7 @@ def test(model, dataset, epoch):
                 len(dataset.dataset),
                 100. * float(correct) / float(len(dataset.dataset))))
 
+
 class MNIST_classifier(nn.Module):
 
     def __init__(self):
@@ -59,6 +62,7 @@ class MNIST_classifier(nn.Module):
         x = self.act(self.conv3(x))
         x = self.conv4(x).view(-1, 10)
         return x
+
 
 if __name__ == '__main__':
 

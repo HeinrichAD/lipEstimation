@@ -10,6 +10,7 @@ import torch.optim as optim
 from torch.autograd import Variable
 import torch.utils.data as data
 
+
 def make_dataset(n_train, n_test, dimension=2, scale=4, x=[], y=[]):
     """ Return a dataset obtained from a Gaussian process in dimension
     `dimension`
@@ -32,14 +33,14 @@ def make_dataset(n_train, n_test, dimension=2, scale=4, x=[], y=[]):
 
     # Uniform sample points in the cube [-1, 1]
     x_train = torch.Tensor(scale * rd.randn(n_train, dimension))
-    x_test  = torch.Tensor(scale * rd.randn(n_test, dimension))
+    x_test = torch.Tensor(scale * rd.randn(n_test, dimension))
     y_train = torch.Tensor(gp.sample_y(x_train))
-    y_test  = torch.Tensor(gp.sample_y(x_test))
+    y_test = torch.Tensor(gp.sample_y(x_test))
     return x_train, y_train
 
-    data_train = torch.utils.data.TensorDataset(x_train, y_train)
-    data_test = torch.utils.data.TensorDataset(x_test, y_test)
-    return data_train, data_test
+    # data_train = torch.utils.data.TensorDataset(x_train, y_train)
+    # data_test = torch.utils.data.TensorDataset(x_test, y_test)
+    # return data_train, data_test
 
 
 def train_model(model, data_train, data_test, n_epochs=10, batch_size=128):

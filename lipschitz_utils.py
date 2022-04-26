@@ -81,12 +81,12 @@ def jacobian(model, v, requires_grad=True):
     if str(type(v)).find('Variable') == -1:
         v = Variable(v, requires_grad=True)
     if len(v.size()) == 1:
-        v = v.unsqueeze(0) # Make batch of size 1
+        v = v.unsqueeze(0)  # Make batch of size 1
     f = model(v)
     # f is of shape [1, dim_output]
     dim_output = f.shape[1]
-    if use_cuda:
-        grad_outputs = grad_outputs.cuda()
+    # if use_cuda:
+        # grad_outputs = grad_outputs.cuda()
 
     jacobian = torch.zeros(dim_input, dim_output)
     for i in range(dim_output):

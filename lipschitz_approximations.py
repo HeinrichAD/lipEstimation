@@ -11,7 +11,8 @@ from torch.autograd import Variable
 from max_eigenvalue import max_eigenvalue, generic_power_method, lipschitz_bn
 
 from lipschitz_utils import *
-import experiments.bruteforce_optim as bo
+# import experiments.bruteforce_optim as bo
+import seqlip as bo
 
 
 def lipschitz_opt_lb(model, initial_max=None, num_iter=100):
@@ -416,6 +417,7 @@ def lipschitz_second_order_ub(model, algo='greedy'):
     del var_through_lin, u_prev, s_prev
     #print('res', res)
     return res
+
 
 def resize_with_zeros(x, size):
     ''' Resizes the vector with trailing zeros if necessary.'''
