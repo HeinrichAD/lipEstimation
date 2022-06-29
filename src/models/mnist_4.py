@@ -6,7 +6,7 @@ from torchvision import datasets, transforms
 
 from torch.autograd import Variable
 
-from utils import load_model
+from lipestimation.utils import load_model
 
 
 def mnist_4():

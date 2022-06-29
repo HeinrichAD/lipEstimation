@@ -1,5 +1,4 @@
 import itertools
-import math
 
 import numpy as np
 import numpy.random as rd
@@ -109,7 +108,6 @@ def optim_greedy(mat_l, mat_r, verbose=True):
     max | U d(sigma) V|
     where |.| is the spectral norm, with sigma being in the cube [0, 1]
     """
-    from tqdm import tqdm
     n = mat_l.shape[1]
     sigma = np.ones(n, dtype=np.int)
     stop_criterion = False
@@ -214,7 +212,7 @@ def optim_nn_greedy(f_l, f_r, input_size, use_cuda=False, max_iter=200, verbose=
 def optim_nn_pca_greedy(U, V, max_iteration=10, verbose=True):
     """ U is k x n and V is n x k
 
-    Goal of this optimisation method is to get an approximation of the upper
+    Goal of this optimization method is to get an approximation of the upper
     bound using only a few of the singular vectors associated to the highest
     singular values.
     """

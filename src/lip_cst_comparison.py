@@ -19,19 +19,19 @@ from models.mlp import MLP
 # from simplenn import MultiLayerPercetron
 # from models.multi_layer_perceptron import MultiLayerPercetron, MultiLayerPercetronNoActivation
 
-from lipschitz_utils import *
+from lipestimation.lipschitz_utils import *
 import experiments.gp as gp
 
 # from models.actors import actor
 # from models.projector import projector
 
-from lipschitz_approximations import *
+from lipestimation.lipschitz_approximations import *
 
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 from matplotlib import cm
 
-# from utils import clip, clip_gradient, save_images, sample_draws, compute_wasserstein
+# from lipestimation.utils import clip, clip_gradient, save_images, sample_draws, compute_wasserstein
 
 # Global parameters
 use_cuda = torch.cuda.is_available()
@@ -187,12 +187,13 @@ if __name__ == "__main__":
 
     print(__doc__)
 
-    vals = range(1, 11)
+    vals = range(1, 3)
     plt.semilogy(vals, np.ones(len(vals)), '--', label='AutoLip')
     plt.semilogy(vals, [1/math.pi**(x-1) for x in vals], '--', label='theoretical limit')
     for epsilon in [0.01]:#[0.5, 0.1, 0.01]:
         res = np.ones(len(vals))
         for i in range(len(vals)):
+            print("#####", i)
             input_size = 2
             output_size = 1
             layer_size = 100
@@ -228,4 +229,4 @@ if __name__ == "__main__":
     plt.ylabel('SeqLip upper bound')
     os.makedirs("plots", exist_ok=True)
     plt.savefig(f"plots/lip_cst_comparison.png", bbox_inches="tight", dpi=300)
-    plt.show()
+    plt.show(block=False)

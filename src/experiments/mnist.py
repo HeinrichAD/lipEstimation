@@ -9,11 +9,11 @@ import torchvision
 
 import numpy as np
 
-from lipschitz_utils import *
-from max_eigenvalue import k_generic_power_method
+from lipestimation.lipschitz_utils import *
+from lipestimation.max_eigenvalue import k_generic_power_method
 
-from models.mnist import mnist
-from seqlip import optim_nn_pca_greedy
+from models.mnist_4 import mnist_4 as mnist
+from lipestimation.seqlip import optim_nn_pca_greedy
 
 n_sv = 200
 

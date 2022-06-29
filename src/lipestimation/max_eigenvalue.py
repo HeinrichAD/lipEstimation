@@ -1,10 +1,6 @@
-import operator
-
-import numpy as np
 import torch
-import torch.nn as nn
+from torch.autograd import Variable
 import torch.nn.functional as F
-from torch.autograd import Variable, Function
 
 
 def generic_power_method(affine_fun, input_size, eps=1e-8,
@@ -26,7 +22,7 @@ def generic_power_method(affine_fun, input_size, eps=1e-8,
 
     NOTE:
         This algorithm is not deterministic, depending of the random
-        initialisation, the returned eigenvectors are defined up to the sign.
+        initialization, the returned eigenvectors are defined up to the sign.
 
         If affine_fun is a PyTorch model, beware of setting to `False` all
         parameters.requires_grad.
@@ -73,7 +69,7 @@ def generic_power_method(affine_fun, input_size, eps=1e-8,
         v = F.normalize(v.view(v.shape[0], -1), p=2, dim=1).view(input_size)
         stop_criterion = (torch.norm(v - previous) < eps) or (it > max_iter)
         it += 1
-    # Compute Rayleigh product to get eivenvalue
+    # Compute Rayleigh product to get eigenvalue
     u = linear_fun(Variable(v))  # unormalized left singular vector
     eigenvalue = norm(u)
     u = u.div(eigenvalue)
@@ -107,7 +103,7 @@ def k_generic_power_method(affine_fun, input_size, n_singular_values, eps=1e-8,
 
     NOTE:
         This algorithm is not deterministic, depending of the random
-        initialisation, the eigenvectors are defined up to the sign.
+        initialization, the eigenvectors are defined up to the sign.
 
         If affine_fun is a PyTorch model, beware of setting to `False` all
         parameters.requires_grad.
@@ -198,7 +194,7 @@ def _power_method_matrix(matrix, eps=1e-6, max_iter=300, use_cuda=False):
         v = v / torch.norm(v)
         stop_criterion = (torch.norm(v - previous) < eps) or (it > max_iter)
         it += 1
-    # Compute Rayleigh product to get eivenvalue
+    # Compute Rayleigh product to get eigenvalue
     eigenvalue = torch.norm(matrix @ v)
     return eigenvalue, v
 

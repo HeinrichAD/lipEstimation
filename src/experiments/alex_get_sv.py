@@ -4,10 +4,8 @@ import os.path
 import torch
 import torchvision
 
-import numpy as np
-
-from lipschitz_utils import *
-from max_eigenvalue import k_generic_power_method, lipschitz_bn
+from ..lipestimation.lipschitz_utils import *
+from ..lipestimation.max_eigenvalue import k_generic_power_method, lipschitz_bn
 
 n_sv = 200
 

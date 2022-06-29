@@ -8,11 +8,10 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 from torch.autograd import Variable
-from max_eigenvalue import max_eigenvalue, generic_power_method, lipschitz_bn
 
-from lipschitz_utils import *
-# import experiments.bruteforce_optim as bo
-import seqlip as bo
+from .max_eigenvalue import generic_power_method, lipschitz_bn
+from .lipschitz_utils import *
+from . import seqlip as bo
 
 
 def lipschitz_opt_lb(model, initial_max=None, num_iter=100):
@@ -36,8 +35,7 @@ def lipschitz_opt_lb(model, initial_max=None, num_iter=100):
     v = nn.Parameter(initial_max, requires_grad=True)
 
     optimizer = optim.Adam([v], lr=1e-3)
-    # optimizer = optim.SGD([v], lr=1e-3, momentum=0.9,
-    #         nesterov=False)
+    # optimizer = optim.SGD([v], lr=1e-3, momentum=0.9, nesterov=False)
     schedule = optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='max',
             factor=0.5, patience=50, cooldown=10, threshold=1e-6, eps=1e-6,
             verbose=10)
@@ -114,7 +112,7 @@ def lipschitz_opt_annealing(model, *args, **kwds):
 
     Basin-hopping algorithm as implemented in SciPY
 
-    WARNING: using CUDA provoks memory errors
+    WARNING: using CUDA provokes memory errors
     """
     from functools import reduce
     from operator import mul
@@ -141,7 +139,7 @@ def lipschitz_opt_annealing(model, *args, **kwds):
 
 
 def lipschitz_annealing(model, temp=1, step_size=1, batch_size=128, n_iter=64):
-    """ Performs a simulated annealing maximisation directly on the model
+    """ Performs a simulated annealing maximization directly on the model
 
     Algorithm: use Boltzman-Gibbs energy function, can we do better?
 
@@ -152,7 +150,7 @@ def lipschitz_annealing(model, temp=1, step_size=1, batch_size=128, n_iter=64):
         * `batch_size`: number of parallel annealings
         * `n_iter`: number of iterations
 
-    Each time a new maximum is found, slightly reduce the stepsize
+    Each time a new maximum is found, slightly reduce the step size
 
     TODO:   * local optimization
     """
@@ -190,7 +188,7 @@ def lipschitz_annealing(model, temp=1, step_size=1, batch_size=128, n_iter=64):
         if maximum < tmp_max:
             maximum = tmp_max
             n_improve += 1
-            # Slightly reduce stepsize
+            # Slightly reduce step size
             # TODO: what's the best way to do it?
             step_size = step0 / math.sqrt(1+n_improve)
             print(' => New maximum: {:.4f} step size: {:.4f}'.format(maximum,
@@ -215,12 +213,12 @@ def lipschitz_annealing(model, temp=1, step_size=1, batch_size=128, n_iter=64):
 
 
 def lipschitz_gsearch_lb(model, constraints, grid_size):
-    """ Perform a gridsearch to find Lipschitz lower bound
+    """ Perform a grid search to find Lipschitz lower bound
 
-    INTPUT:
+    INPUT:
         * `model`: model
         * `constraints`: array of shape [dimensions, 2] given bound of the grid
-        for every dimenion
+        for every dimension
         * `grid_size`: number of points for every dimension
 
     OUTPUT: maximal value of the gradient at the intersection points

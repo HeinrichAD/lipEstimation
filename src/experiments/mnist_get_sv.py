@@ -3,8 +3,8 @@ import torch
 
 import numpy as np
 
-from lipschitz_utils import *
-from max_eigenvalue import k_generic_power_method
+from lipestimation.lipschitz_utils import *
+from lipestimation.max_eigenvalue import k_generic_power_method
 
 from models.mnist_5 import mnist_5
 

@@ -9,11 +9,11 @@ import torchvision
 
 import numpy as np
 
-from lipschitz_utils import *
-from max_eigenvalue import k_generic_power_method
+from lipestimation.lipschitz_utils import *
+from lipestimation.max_eigenvalue import k_generic_power_method
 
 # from experiments.bruteforce_optim import optim_nn_pca_greedy
-from seqlip import optim_nn_pca_greedy
+from lipestimation.seqlip import optim_nn_pca_greedy
 
 alex = torchvision.models.alexnet(pretrained=True)
 alex = alex.cuda()

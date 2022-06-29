@@ -1,8 +1,8 @@
-import numpy as np
 import torch
 import torch.autograd as autograd
 from torch.autograd import Variable
-from max_eigenvalue import max_eigenvalue, generic_power_method
+
+from .max_eigenvalue import max_eigenvalue, generic_power_method
 
 
 def compute_module_input_sizes(model, input_size):
@@ -47,14 +47,14 @@ def execute_through_model(function, model, input_size=None, backwards=False):
 
 def get_input_size(data, batch_size=1):
     data_load = torch.utils.data.DataLoader(data, batch_size=batch_size)
-    for batch_idx, (one_image, _) in enumerate(data_load):
+    for one_image, _ in data_load:
         return one_image.size()
 
 
 def gradient_norm(model, v, requires_grad=True):
     """ Return the gradient of `model` at point `v`
 
-    FIXME: make requires_grad attribute usefull
+    FIXME: make requires_grad attribute useful
     """
     use_cuda = next(model.parameters()).is_cuda
 
@@ -125,7 +125,7 @@ def is_convolution_or_linear(layer):
 
 
 def is_batch_norm(layer):
-    """ Return True if `layer` is a batch normalisation layer
+    """ Return True if `layer` is a batch normalization layer
     """
     classname = layer.__class__.__name__
     return classname.find('BatchNorm') != -1

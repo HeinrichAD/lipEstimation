@@ -1,4 +1,4 @@
-from setuptools import find_packages, setup
+from setuptools import setup
 
 
 # read version file
@@ -11,6 +11,14 @@ def readme():
         return f.read()
 
 
+extras_require = {
+    "dev": [
+        "matplotlib",
+        "sklearn",
+        "torchvision",
+    ],
+}
+
 setup(
     name="lipestimation",
     author="avirmaux",
@@ -20,18 +28,19 @@ setup(
     long_description=readme(),
     long_description_content_type="text/markdown",
     url="https://github.com/HeinrichAD/lipEstimation",
-    packages=find_packages(),
+    packages=["lipestimation"],
+    package_dir={
+        "lipestimation": "src/lipestimation",
+    },
     python_requires=">=3.7",
     install_requires=[  # TODO: add version numbers
-        "matplotlib",
         "numpy",
-        "sklearn",
         "scipy",
         "torch",
-        "torchvision",
         "tqdm",
         "typing-extensions",
     ],
+    extras_require=extras_require,
     classifiers=[
         "Intended Audience :: Science/Research",
         "Operating System :: OS Independent",

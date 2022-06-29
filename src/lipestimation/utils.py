@@ -1,10 +1,5 @@
-import numpy as np
-import ot
-
-from torch.autograd import Variable
-
 import torch
-import torchvision.utils as vutils
+
 
 # Global parameters
 use_cuda = torch.cuda.is_available()
@@ -52,6 +47,7 @@ def get_sv_linear_model(model):
             _, s, _ = torch.svd(p.weight)
             singular_values.append(s.data.numpy())
     return singular_values
+
 
 # def get_inner_product_hg_sv(model):
 #     inner_products = []
