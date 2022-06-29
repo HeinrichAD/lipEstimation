@@ -226,4 +226,6 @@ if __name__ == "__main__":
     plt.xlim(vals[0], vals[-1])
     plt.xlabel('Number of layers')
     plt.ylabel('SeqLip upper bound')
+    os.makedirs("plots", exist_ok=True)
+    plt.savefig(f"plots/lip_cst_comparison.png", bbox_inches="tight", dpi=300)
     plt.show()

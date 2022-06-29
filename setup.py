@@ -12,7 +12,7 @@ def readme():
 
 
 setup(
-    name="lipschitz-estimation",
+    name="lipestimation",
     author="avirmaux",
     author_email="avirmaux@github.com",
     version=__version__,  # type: ignore # noqa F821
